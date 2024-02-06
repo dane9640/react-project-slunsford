@@ -32,16 +32,21 @@ function App() {
 
   //Function to handle adding todos
   function handleAddTodo(e) {
-   const name = todoNameRef.current.value;
+    //Checks if event is either a click or an enter key press
+    if (e.type === 'click' || (e.type === 'keydown' && e.key === 'Enter')) {
+      const name = todoNameRef.current.value;
 
-   if (name === '' || e.key !== 'Enter') {
-    return
-   }
-   todoNameRef.current.value = null;
-   
-   setTodos(prevTodos => {
-     return [...prevTodos, {id: uuidv4(), name: name, completed: false}]
-   })
+
+      if (name === '') {
+        return
+      }
+      
+      todoNameRef.current.value = null;
+      
+      setTodos(prevTodos => {
+        return [...prevTodos, {id: uuidv4(), name: name, completed: false}]
+      })
+    }
   }
 
   //Function to handle clearing completed todos
